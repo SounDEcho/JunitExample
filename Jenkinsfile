@@ -2,11 +2,11 @@ node {
    def mvnHome
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
-      git 'https://github.com/pmisarwala/JunitExample.git'
+      git 'https://github.com/SounDEcho/JunitExample.git'
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
-      mvnHome = tool 'm3'
+      mvnHome = tool 'M2'
    }
    stage('Build') {
       // Run the maven build
@@ -16,7 +16,7 @@ node {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
    }
-   stage('Results') {
+   stage('Result') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archive 'target/*.war'
    }
